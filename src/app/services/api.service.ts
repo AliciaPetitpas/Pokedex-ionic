@@ -17,8 +17,8 @@ export class ApiService {
     return this.http.get(url);
   }
 
-  getPokemonById(id: number) {
-    return this.http.get(this.apiUrl + '/' + id);
+  getPokemonByParam(param: number | string) {
+    return this.http.get(this.apiUrl + '/' + param);
   }
 
   getPokemonDescriptions(url: string) {

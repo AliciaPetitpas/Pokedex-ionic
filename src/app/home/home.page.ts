@@ -4,14 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
-import { Pokemon } from '../models/pokemon';
+import { SearchComponent } from '../search/search.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule, RouterLink]
+  imports: [CommonModule, FormsModule, IonicModule, RouterLink, SearchComponent]
 })
 export class HomePage implements OnInit {
   pokemonsTemp: any[] = [];

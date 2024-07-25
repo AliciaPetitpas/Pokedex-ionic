@@ -10,7 +10,7 @@
     <ion-text>{{ description }}</ion-text>
   
     <ion-grid>
-      <ion-text>Types :</ion-text>
+      <ion-text>Type.s :</ion-text>
       <ion-col *ngFor="let type of types">
         <ion-text [ngClass]="'capitalize'">{{ type?.name }}</ion-text>
       </ion-col>
@@ -26,6 +26,7 @@
         <img [src]="pokemon?.sprites.back_shiny" [alt]="pokemon?.name" height="100" />
       </ion-row>
     </ion-grid>
+    <ion-button (click)="favourite()">{{ textFavoris }}</ion-button>
     <ion-button (click)="goBack()">Retour</ion-button>
   </div>
 </ion-content>

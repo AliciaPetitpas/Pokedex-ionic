@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../services/api.service';
-import { Pokemon } from '../models/pokemon';
 import { Type } from '../models/type';
+import { Preferences } from '@capacitor/preferences';
+import { StorageService } from '../services/storage.service';
 
 @Component({
   selector: 'app-pokemon',
@@ -19,13 +20,15 @@ export class PokemonPage implements OnInit {
   pokemon: any;
   description: string = "";
   types: Type[] = [];
+  isFavoris: boolean = false;
+  textFavoris: string = "";
 
-  constructor(private route: ActivatedRoute, private navController: NavController, private apiSrv: ApiService) { }
+  constructor(private route: ActivatedRoute, private navController: NavController, private apiSrv: ApiService, private storageSrv: StorageService) { }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
 
-    this.apiSrv.getPokemonById(this.id).subscribe({
+    this.apiSrv.getPokemonByParam(this.id).subscribe({
       next: (response: any) => {
         console.log(response);
         if (response.name) {
@@ -44,6 +47,7 @@ export class PokemonPage implements OnInit {
       }, complete: () => {
         // console.log(this.types);
         this.getDescriptions(this.pokemon?.species.url);
+        this.getFavourite();
       }
     })
   }
@@ -60,6 +64,32 @@ export class PokemonPage implements OnInit {
         console.log(err);
       }
     })
+  }
+
+  async getFavourite() {
+    let storage = await this.storageSrv.getFavourite(this.pokemon?.name);
+
+    if (storage != null) {
+      this.isFavoris = true;
+    }
+    
+    this.favouriteText();
+  }
+
+  async favourite() {
+    if (this.isFavoris) {
+      await this.storageSrv.removeFavourite(this.pokemon?.name);
+      this.isFavoris = false;
+    } else {
+      await this.storageSrv.addFavourite(this.pokemon?.name, this.pokemon?.id);
+      this.isFavoris = true;
+    }
+
+    this.favouriteText();
+  }
+
+  favouriteText() {
+    this.textFavoris = this.isFavoris ? "Retirer des favoris" : "Ajouter aux favoris";
   }
 
   goBack() {
