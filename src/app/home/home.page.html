@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>home</ion-title>
+    <ion-title>Pokédex</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -8,7 +8,8 @@
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let p of pokemons" size="2">
-        <ion-text (click)="getPokemon(p.id)">{{ p.name }}</ion-text>
+        <ion-text (click)="getPokemon(p.id)" [ngClass]="'capitalize'">{{ p.name }}</ion-text>
+        <img [src]="p.sprite" [alt]="p.name" (click)="getPokemon(p.id)">
       </ion-col>
     </ion-row>
   </ion-grid>

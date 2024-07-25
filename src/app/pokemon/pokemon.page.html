@@ -1,10 +1,31 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>pokemon</ion-title>
+    <ion-title>Pokédex</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-text>Pokemon ID {{ id }}</ion-text>
-  <ion-button (click)="goBack()">Retour</ion-button>
+  <div [ngClass]="'main'">
+    <ion-text [ngClass]="'capitalize'">{{ pokemon?.name }}</ion-text>
+    <ion-text>{{ description }}</ion-text>
+  
+    <ion-grid>
+      <ion-text>Types :</ion-text>
+      <ion-col *ngFor="let type of types">
+        <ion-text [ngClass]="'capitalize'">{{ type?.name }}</ion-text>
+      </ion-col>
+    </ion-grid>
+  
+    <ion-grid>
+      <ion-row>
+        <img [src]="pokemon?.sprites.front_default" [alt]="pokemon?.name" height="100" />
+        <img [src]="pokemon?.sprites.back_default" [alt]="pokemon?.name" height="100" />
+      </ion-row>
+      <ion-row>
+        <img [src]="pokemon?.sprites.front_shiny" [alt]="pokemon?.name" height="100" />
+        <img [src]="pokemon?.sprites.back_shiny" [alt]="pokemon?.name" height="100" />
+      </ion-row>
+    </ion-grid>
+    <ion-button (click)="goBack()">Retour</ion-button>
+  </div>
 </ion-content>

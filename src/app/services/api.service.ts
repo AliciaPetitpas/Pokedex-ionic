@@ -12,4 +12,16 @@ export class ApiService {
   getPokemons() {
     return this.http.get(this.apiUrl);
   }
+
+  getPokemon(url: string) {
+    return this.http.get(url);
+  }
+
+  getPokemonById(id: number) {
+    return this.http.get(this.apiUrl + '/' + id);
+  }
+
+  getPokemonDescriptions(url: string) {
+    return this.http.get(url);
+  }
 }

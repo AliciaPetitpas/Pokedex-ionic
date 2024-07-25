@@ -1,3 +1,4 @@
+import { Abilitie } from "./abilitie";
 import { Sprite } from "./sprite";
 import { Stats } from "./stats";
 import { Type } from "./type";
@@ -8,6 +9,7 @@ export interface Pokemon {
     url: string;
     order: number;
     sprites: Sprite;
-    stats: Array<Stats>;
-    types: Array<Type>;
+    stats: Stats[];
+    types: Type[];
+    abilities: Abilitie[];
 }
