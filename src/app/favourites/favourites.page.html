@@ -16,9 +16,8 @@
     <ion-text>Mes favoris</ion-text>
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let fav of favourites" size="4">
-          <ion-text (click)="getPokemon(fav.id)" [ngClass]="'capitalize'">{{ fav.name }}</ion-text>
-          <img [src]="fav.sprite" [alt]="fav.name" (click)="getPokemon(fav.id)">
+        <ion-col *ngFor="let fav of favourites">
+          <img [src]="fav.sprite" [alt]="fav.name" (click)="getPokemon(fav.id)" class="spritePokemon">
         </ion-col>
       </ion-row>
     </ion-grid>

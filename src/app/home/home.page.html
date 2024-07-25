@@ -12,12 +12,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid>
-    <ion-row>
-      <ion-col *ngFor="let p of pokemons" size="2">
-        <ion-text (click)="getPokemon(p.id)" [ngClass]="'capitalize'">{{ p.name }}</ion-text>
-        <img [src]="p.sprite" [alt]="p.name" (click)="getPokemon(p.id)">
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <ion-infinite-scroll>
+    <ion-infinite-scroll-content>
+      <ion-grid>
+        <ion-col *ngFor="let p of pokemons">
+          <img [src]="p.sprite" [alt]="p.name" (click)="getPokemon(p.id)" class="spritePokemon">
+        </ion-col>
+      </ion-grid>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

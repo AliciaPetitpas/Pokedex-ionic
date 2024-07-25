@@ -10,7 +10,7 @@ export class ApiService {
   constructor(private http: HttpClient) { }
 
   getPokemons() {
-    return this.http.get(this.apiUrl);
+    return this.http.get(this.apiUrl + "?offset=0&limit=1302");
   }
 
   getPokemon(url: string) {
