@@ -5,6 +5,8 @@ import { Router, RouterLink } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { SearchComponent } from '../search/search.component';
+import { addIcons } from 'ionicons';
+import { star } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +19,9 @@ export class HomePage implements OnInit {
   pokemonsTemp: any[] = [];
   pokemons: any[] = [];
 
-  constructor(private router: Router, private apiSrv: ApiService) { }
+  constructor(private router: Router, private apiSrv: ApiService) { 
+    addIcons({ star })
+  }
 
   ngOnInit() {
     this.apiSrv.getPokemons().subscribe({
@@ -61,6 +65,10 @@ export class HomePage implements OnInit {
 
   getPokemon(id: number) {
     this.router.navigate(['/pokemon', id]);
+  }
+
+  myFavourites() {
+    this.router.navigate(['/favourites']);
   }
 
 }

@@ -2,18 +2,21 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule, NavController } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { Type } from '../models/type';
 import { Preferences } from '@capacitor/preferences';
 import { StorageService } from '../services/storage.service';
+import { SearchComponent } from '../search/search.component';
+import { addIcons } from 'ionicons';
+import { star } from 'ionicons/icons';
 
 @Component({
   selector: 'app-pokemon',
   templateUrl: './pokemon.page.html',
   styleUrls: ['./pokemon.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule]
+  imports: [CommonModule, FormsModule, IonicModule, SearchComponent]
 })
 export class PokemonPage implements OnInit {
   id: number = 0;
@@ -23,7 +26,9 @@ export class PokemonPage implements OnInit {
   isFavoris: boolean = false;
   textFavoris: string = "";
 
-  constructor(private route: ActivatedRoute, private navController: NavController, private apiSrv: ApiService, private storageSrv: StorageService) { }
+  constructor(private route: ActivatedRoute, private navController: NavController, private apiSrv: ApiService, private storageSrv: StorageService, private router: Router) { 
+    addIcons({ star })
+  }
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
@@ -90,6 +95,10 @@ export class PokemonPage implements OnInit {
 
   favouriteText() {
     this.textFavoris = this.isFavoris ? "Retirer des favoris" : "Ajouter aux favoris";
+  }
+
+  myFavourites() {
+    this.router.navigate(['/favourites']);
   }
 
   goBack() {

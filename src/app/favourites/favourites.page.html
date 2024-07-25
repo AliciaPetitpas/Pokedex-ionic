@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Pokédex</ion-title>
+    <div class="header">
+      <app-search></app-search>
+      <ion-button (click)="myFavourites()" size="small">
+        <ion-icon slot="start" name="star"></ion-icon>
+        Mes favoris
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="main">
+    <ion-text>Mes favoris</ion-text>
+    <ion-grid>
+      <ion-row>
+        <ion-col *ngFor="let fav of favourites" size="4">
+          <ion-text (click)="getPokemon(fav.id)" [ngClass]="'capitalize'">{{ fav.name }}</ion-text>
+          <img [src]="fav.sprite" [alt]="fav.name" (click)="getPokemon(fav.id)">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-button (click)="goBack()">Retour</ion-button>
+  </div>
+</ion-content>

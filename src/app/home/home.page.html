@@ -1,11 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Pokédex</ion-title>
+    <div class="header">
+      <app-search></app-search>
+      <ion-button (click)="myFavourites()" size="small">
+        <ion-icon slot="start" name="star"></ion-icon>
+        Mes favoris
+      </ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <app-search></app-search>
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let p of pokemons" size="2">
