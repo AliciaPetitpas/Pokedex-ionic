@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>home</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let p of pokemons" size="2">
+        <ion-text (click)="getPokemon(p.id)">{{ p.name }}</ion-text>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
