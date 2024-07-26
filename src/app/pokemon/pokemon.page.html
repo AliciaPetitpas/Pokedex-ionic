@@ -39,8 +39,8 @@
     </ion-grid>
 
     <div class="btns">
-      <ion-button (click)="previous(pokemon?.id)" [disabled]="pokemon?.id == 1"><ion-icon name="arrowBack"></ion-icon></ion-button>
-      <ion-button (click)="next(pokemon?.id)" [disabled]="pokemon?.id == 10277"><ion-icon name="arrowForward"></ion-icon></ion-button>
+      <ion-button (click)="previous(pokemon?.id)" [disabled]="pokemon?.id == 1" shape="round"><ion-icon slot="icon-only" name="arrow-back"></ion-icon></ion-button>
+      <ion-button (click)="next(pokemon?.id)" [disabled]="pokemon?.id == 10277" shape="round"><ion-icon slot="icon-only" name="arrow-forward"></ion-icon></ion-button>
     </div>
 
     <div class="btns">

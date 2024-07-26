@@ -5,7 +5,6 @@ import { IonicModule, NavController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { Type } from '../models/type';
-import { Preferences } from '@capacitor/preferences';
 import { StorageService } from '../services/storage.service';
 import { SearchComponent } from '../search/search.component';
 import { addIcons } from 'ionicons';
