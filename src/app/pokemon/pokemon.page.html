@@ -7,6 +7,10 @@
         <ion-icon slot="start" name="star"></ion-icon>
         Mes favoris
       </ion-button>
+      <ion-button (click)="myTeam()" size="small">
+        <ion-icon slot="start" name="trophy"></ion-icon>
+        Mon équipe
+      </ion-button>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -34,6 +38,7 @@
       </ion-row>
     </ion-grid>
     <ion-button (click)="favourite()">{{ textFavoris }}</ion-button>
+    <ion-button (click)="team()">{{ textTeam }}</ion-button>
     <ion-button (click)="goBack()">Retour</ion-button>
   </div>
 </ion-content>

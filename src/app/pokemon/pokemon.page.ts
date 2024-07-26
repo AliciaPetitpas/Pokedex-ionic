@@ -9,7 +9,7 @@ import { Preferences } from '@capacitor/preferences';
 import { StorageService } from '../services/storage.service';
 import { SearchComponent } from '../search/search.component';
 import { addIcons } from 'ionicons';
-import { star } from 'ionicons/icons';
+import { star, trophy } from 'ionicons/icons';
 
 @Component({
   selector: 'app-pokemon',
@@ -25,9 +25,14 @@ export class PokemonPage implements OnInit {
   types: Type[] = [];
   isFavoris: boolean = false;
   textFavoris: string = "";
+  isTeam: boolean = false;
+  textTeam: string = "";
+  teamKey: string = "TEAM_KEY";
+  teamStorage: any = {};
+  errorMsg: string = "";
 
   constructor(private route: ActivatedRoute, private navController: NavController, private apiSrv: ApiService, private storageSrv: StorageService, private router: Router) { 
-    addIcons({ star })
+    addIcons({ star, trophy });
   }
 
   ngOnInit() {
@@ -35,7 +40,7 @@ export class PokemonPage implements OnInit {
 
     this.apiSrv.getPokemonByParam(this.id).subscribe({
       next: (response: any) => {
-        console.log(response);
+        // console.log(response);
         if (response.name) {
           this.pokemon = response;
 
@@ -53,6 +58,7 @@ export class PokemonPage implements OnInit {
         // console.log(this.types);
         this.getDescriptions(this.pokemon?.species.url);
         this.getFavourite();
+        this.getTeam();
       }
     })
   }
@@ -97,8 +103,81 @@ export class PokemonPage implements OnInit {
     this.textFavoris = this.isFavoris ? "Retirer des favoris" : "Ajouter aux favoris";
   }
 
+  async getTeam() {
+    let storage = await this.storageSrv.getTeam();
+
+    if (storage != null) {
+      for (let x = 0; x < 6 ; x++) {
+        if (storage[x] == this.pokemon?.name) {
+          this.isTeam = true;
+        }
+      }
+    }
+    
+    this.teamText();
+  }
+
+  async team() {
+    let storage = await this.storageSrv.getTeam();
+
+    if (this.isTeam) {
+      if (storage != null) {
+        this.teamStorage = storage;
+
+        for (let x = 0; x < 6 ; x++) {
+          if (this.teamStorage[x] == this.pokemon?.name) {
+            this.teamStorage[x] = undefined
+          }
+        }
+
+        await this.storageSrv.addTeam(this.teamStorage);
+        this.isTeam = false;
+      } else {
+        await this.storageSrv.removeTeam();
+        this.isTeam = false;
+      }
+    } else {
+      if (storage != null) {
+        this.teamStorage = storage;
+  
+        for (let x = 0; x < 6 ; x++) {
+          // if (this.teamStorage[x] != undefined) {
+          //   this.errorTeam();
+          // }
+          if (this.teamStorage[x] != this.pokemon?.name && this.teamStorage[x] == undefined) {
+            console.log("here");
+            this.teamStorage[x] = this.pokemon?.name;
+            break;
+          }
+        }
+  
+        await this.storageSrv.addTeam(this.teamStorage);
+        this.isTeam = true;
+      } else {
+        await this.storageSrv.addTeam({ 0: this.pokemon?.name});
+        this.isTeam = true;
+      }
+    }
+
+    this.teamText();
+  }
+
+  teamText() {
+    this.textTeam = this.isTeam ? "Retirer de mon équipe" : "Ajouter à mon équipe";
+  }
+
+  errorTeam() {
+    // console.log("here");
+    this.errorMsg = "L'équipe est déjà au complet";
+    this.isTeam = false;
+  }
+
   myFavourites() {
     this.router.navigate(['/favourites']);
+  }
+
+  myTeam() {
+    this.router.navigate(['/team']);
   }
 
   goBack() {

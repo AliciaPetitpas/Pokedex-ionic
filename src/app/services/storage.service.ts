@@ -5,12 +5,21 @@ import { Preferences } from '@capacitor/preferences';
   providedIn: 'root'
 })
 export class StorageService {
+  private teamKey: string = "TEAM_KEY";
+
   constructor() { }
 
   async addFavourite(pokemonName: string, pokemonId: number) {
     await Preferences.set({
       key: pokemonName,
       value: pokemonId.toString(),
+    })
+  }
+
+  async addTeam(data: any) {
+    await Preferences.set({
+      key: this.teamKey,
+      value: JSON.stringify(data),
     })
   }
 
@@ -22,7 +31,19 @@ export class StorageService {
     }
   }
 
+  async getTeam() {
+    const { value } = await Preferences.get({ key: this.teamKey });
+
+    if (value) {
+      return JSON.parse(value);
+    }
+  }
+
   async removeFavourite(pokemonName: string) {
     await Preferences.remove({ key: pokemonName });
+  }
+
+  async removeTeam() {
+    await Preferences.remove({ key: this.teamKey });
   }
 }

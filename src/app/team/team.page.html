@@ -17,11 +17,11 @@
 
 <ion-content [fullscreen]="true">
   <div class="main">
-    <ion-text>Mes favoris</ion-text>
+    <ion-text>Mon équipe</ion-text>
     <ion-grid>
       <ion-row>
-        <ion-col *ngFor="let fav of favourites">
-          <img [src]="fav.sprite" [alt]="fav.name" (click)="getPokemon(fav.id)" class="spritePokemon">
+        <ion-col *ngFor="let pokemon of team">
+          <img [src]="pokemon.sprite" [alt]="pokemon.name" (click)="getPokemon(pokemon.id)" class="spritePokemon">
         </ion-col>
       </ion-row>
     </ion-grid>

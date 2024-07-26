@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { SearchComponent } from '../search/search.component';
 import { addIcons } from 'ionicons';
-import { star } from 'ionicons/icons';
+import { star, trophy } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   pokemons: any[] = [];
 
   constructor(private router: Router, private apiSrv: ApiService) { 
-    addIcons({ star })
+    addIcons({ star, trophy })
   }
 
   ngOnInit() {
@@ -69,6 +69,10 @@ export class HomePage implements OnInit {
 
   myFavourites() {
     this.router.navigate(['/favourites']);
+  }
+
+  myTeam() {
+    this.router.navigate(['/team']);
   }
 
 }
