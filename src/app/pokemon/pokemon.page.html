@@ -39,13 +39,13 @@
     </ion-grid>
 
     <div class="btns">
-      <ion-button (click)="previous(pokemon?.id)" [disabled]="pokemon?.id == 1" shape="round"><ion-icon slot="icon-only" name="arrow-back"></ion-icon></ion-button>
-      <ion-button (click)="next(pokemon?.id)" [disabled]="pokemon?.id == 10277" shape="round"><ion-icon slot="icon-only" name="arrow-forward"></ion-icon></ion-button>
+      <ion-button (click)="previous(pokemon?.id)" [disabled]="pokemon?.id == 1" shape="round" color="tertiary"><ion-icon slot="icon-only" name="arrow-back"></ion-icon></ion-button>
+      <ion-button (click)="next(pokemon?.id)" [disabled]="pokemon?.id == 10277" shape="round" color="tertiary"><ion-icon slot="icon-only" name="arrow-forward"></ion-icon></ion-button>
     </div>
 
     <div class="btns">
-      <ion-button (click)="favourite()">{{ textFavoris }}</ion-button>
-      <ion-button (click)="team()">{{ textTeam }}</ion-button>
+      <ion-button (click)="favourite()" [color]="isFavoris ? 'danger' : 'success'">{{ textFavoris }}</ion-button>
+      <ion-button (click)="team()" [color]="isTeam ? 'danger' : 'success'">{{ textTeam }}</ion-button>
     </div>
     
     <ion-button (click)="goBack()">Retour</ion-button>
