@@ -9,7 +9,7 @@ import { Preferences } from '@capacitor/preferences';
 import { StorageService } from '../services/storage.service';
 import { SearchComponent } from '../search/search.component';
 import { addIcons } from 'ionicons';
-import { star, trophy } from 'ionicons/icons';
+import { arrowBack, arrowForward, star, trophy } from 'ionicons/icons';
 
 @Component({
   selector: 'app-pokemon',
@@ -32,7 +32,7 @@ export class PokemonPage implements OnInit {
   errorMsg: string = "";
 
   constructor(private route: ActivatedRoute, private navController: NavController, private apiSrv: ApiService, private storageSrv: StorageService, private router: Router) { 
-    addIcons({ star, trophy });
+    addIcons({ star, trophy, arrowBack, arrowForward });
   }
 
   ngOnInit() {
@@ -170,6 +170,14 @@ export class PokemonPage implements OnInit {
     // console.log("here");
     this.errorMsg = "L'équipe est déjà au complet";
     this.isTeam = false;
+  }
+
+  previous(id: number) {
+    this.router.navigate(['/pokemon', (id - 1)]);
+  }
+
+  next(id: number) {
+    this.router.navigate(['/pokemon', (id + 1)]);
   }
 
   myFavourites() {

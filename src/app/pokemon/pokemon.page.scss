@@ -5,6 +5,12 @@
     padding: 1rem;
 }
 
+.btns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
 .header {
     display: flex;
     flex-direction: row;

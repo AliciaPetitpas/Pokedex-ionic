@@ -37,8 +37,17 @@
         <img [src]="pokemon?.sprites.back_shiny" [alt]="pokemon?.name" height="100" />
       </ion-row>
     </ion-grid>
-    <ion-button (click)="favourite()">{{ textFavoris }}</ion-button>
-    <ion-button (click)="team()">{{ textTeam }}</ion-button>
+
+    <div class="btns">
+      <ion-button (click)="previous(pokemon?.id)" [disabled]="pokemon?.id == 1"><ion-icon name="arrowBack"></ion-icon></ion-button>
+      <ion-button (click)="next(pokemon?.id)" [disabled]="pokemon?.id == 10277"><ion-icon name="arrowForward"></ion-icon></ion-button>
+    </div>
+
+    <div class="btns">
+      <ion-button (click)="favourite()">{{ textFavoris }}</ion-button>
+      <ion-button (click)="team()">{{ textTeam }}</ion-button>
+    </div>
+    
     <ion-button (click)="goBack()">Retour</ion-button>
   </div>
 </ion-content>

@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { ApiService } from '../services/api.service';
 import { SearchComponent } from '../search/search.component';
 import { addIcons } from 'ionicons';
-import { star, trophy } from 'ionicons/icons';
+import { arrowBack, arrowForward, star, trophy } from 'ionicons/icons';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
   pokemons: any[] = [];
 
   constructor(private router: Router, private apiSrv: ApiService) { 
-    addIcons({ star, trophy })
+    addIcons({ star, trophy, arrowBack, arrowForward })
   }
 
   ngOnInit() {
